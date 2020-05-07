@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.UnsupportedEncodingException;
 
@@ -23,8 +24,8 @@ public class MHPFlow {
 
         final String RELATIVE_PATH = "applogin/";
         String returnString = null;
-        /*String salts[] = getSalt(userName);
-        String hash = BCrypt.hashpw(password, salts[0]);
+        String salts[] = getSalt(userName);
+        /*String hash = BCrypt.hashpw(password, salts[0]);
         String hash1 = BCrypt.hashpw(hash, salts[1]);
         System.out.println("hash---------------------------------> " + hash);
         System.out.println("hash 1----------------------------------> " + hash1);
@@ -84,7 +85,7 @@ public class MHPFlow {
             JSONObject obj = new JSONObject(response.body().string());
             String fixed = obj.getString("fixedSalt");
             String dynamic = obj.getString("dynamicSalt");
-            //System.out.println(fixed +"         "+ dynamic);
+            System.out.println(fixed +"         "+ dynamic);
             returnString[0] = fixed;
             returnString[1] = dynamic;
         }catch(Exception e){

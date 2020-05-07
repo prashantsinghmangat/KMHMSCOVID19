@@ -1,6 +1,8 @@
 package covid19kmhms.KMHMSCOVID19.HomeScreen.FormFill;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,15 +12,26 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import covid19kmhms.KMHMSCOVID19.R;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class MainForm extends AppCompatActivity {
+    private String result = null;
     Button button;
     Spinner spinnerGender , spinnerState;
 
@@ -87,8 +100,8 @@ public class MainForm extends AppCompatActivity {
         visitGroup = (RadioGroup) findViewById(R.id.visitGroup);
         int visitSelect = visitGroup.getCheckedRadioButtonId();
         visitButton = (RadioButton) findViewById(visitSelect);
-        visitButton_string = visitButton.getText().toString();
-
+        //visitButton_string = visitButton.getText().toString();
+        visitButton_string = "visit";
         TypeofVisitGroup = (RadioGroup) findViewById(R.id.TypeofVisitGroup);
         int TypeofVisitSelect = TypeofVisitGroup.getCheckedRadioButtonId();
         TypeofVisitButton = (RadioButton) findViewById(TypeofVisitSelect);
@@ -160,12 +173,101 @@ public class MainForm extends AppCompatActivity {
 
 
 
+
         button = (Button) findViewById(R.id.submitform);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainForm.this, SubmitActivity.class);
-                startActivity(intent);
+
+
+                Thread thread = new Thread() {
+                    public void run() {
+                        System.out.println("inside TestAPI");
+                        String url = "http://13.126.27.50/MHMS_DEV/rest/addRecord";
+                        OkHttpClient client = new OkHttpClient();
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        final String loginToken = sharedPreferences.getString("loginToken", "");
+                        //final String loginToken = sharedPreferences.getString("loginToken", "");
+                        //final String loginToken = "eyJEZXZlbG9wZWQgQnkiOiJlLUhlYWx0aCBSZXNlYXJjaCBDZW50ZXIsIElJSVQgQmFuZ2Fsb3JlIiwiSG9zdCI6Ikthcm5hdGFrYSBNZW50YWwgSGVhbHRoIE1hbmFnZW1lbnQgU3lzdGVtIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJwcm9mZXNzaW9uIjoiTUhNU1BzeWNoaWF0cmlzdCIsInN1YiI6Ik1ITVMgU2VjdXJpdHkgVG9rZW4iLCJsYXN0TG9naW5PcmdJZCI6ImEyMWI4ODVlLTJmM2EtNDQyNS04YjViLTBkMjc0YjQyYWYyNiIsInNlc3Npb25FbmRUaW1lIjoxNTg4ODgwMjk1LCJpc3MiOiJLTUhNUyIsInNlc3Npb25TdGFydFRpbWUiOjE1ODg4MzcwOTUsInNlc3Npb25JZCI6Ijk2OGY0MzYxLWJhMzYtNGU2ZC05MzY5LTJkMmM0NGIxNzk5ZSIsInVzZXJOYW1lIjoicHJhc2hhbnQiLCJvcmdVVUlEIjoiNGNjNzQyODAtZWZlNS00MDE2LWI0MWUtZjI5NDcyYTRlYzEyIiwibmJmIjoxNTg4ODM3MDk1LCJvcmdSb2xlIjoiTUhQcm9mZXNzaW9uYWwiLCJzZXNzaW9uVG9rZW4iOiJTZXNzaW9uSWQ6MTcyLjMxLjUuMTMjcHJhc2hhbnQ6NGNjNzQyODAtZWZlNS00MDE2LWI0MWUtZjI5NDcyYTRlYzEyOk1ITVM6TUhQcm9mZXNzaW9uYWwjMTU4ODgzNzA5NDYzNyMtMTM4NTg0MDk5MyM1OTkiLCJwZXJzb25JZCI6IjkyNWQ2N2NkLTdkM2MtNDA3OC04OWZiLTY5NjNjNDdiNDk2YSIsInVzZXJVVUlEIjoiNzc1YjhjM2UtNjc0Mi00YjMwLWI0NDMtYzdkNmFhNmVjNGFjIiwiZXhwIjoxNTg4ODczMDk1LCJpYXQiOjE1ODg4MzcwOTV9.ryoLG7fWO3TvuWFXdQF2eJRZ_DqxwXMeD_B4cLm_3PY";
+                        JSONObject diagnosis = new JSONObject();
+                        final MediaType JSON
+                                = MediaType.parse("application/json; charset=utf-8");
+                        try {
+
+                            diagnosis.put("diagnosisType", "dty");
+                            diagnosis.put("icdcode", "F12134");
+                            diagnosis.put("icddescription", "icddesc");
+                        } catch (
+                                Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        JSONObject payload = new JSONObject();
+                        try {
+                            payload.put("dateOfConsultation", "24/03/2020");
+                            payload.put("visitType", "vtype");
+                            payload.put("visit", "vist");
+                            payload.put("addressLine1", "adss");
+                            payload.put("district", "dist");
+                            payload.put("city", "city");
+                            payload.put("state", "Kar");
+                            payload.put("pincode", "444444");
+                            payload.put("age", "20");
+                            payload.put("gender", "male");
+                            payload.put("typeOfConsultation", "typecon");
+                            payload.put("coronaPositive", "No");
+                            payload.put("migrant", "migr");
+                            payload.put("quarantineReason", "qr");
+                            payload.put("complaint", "com");
+                            payload.put("history", "hist");
+                            payload.put("illnessSummary", "ill");
+                            payload.put("prescription", "pres");
+                            payload.put("notes", "notes");
+                            payload.put("userUuid", "uuid");
+                            payload.put("latitude", "32435");
+                            payload.put("longitude", "45");
+                            payload.put("orgUuid", "org456");
+                            JSONArray arr = new JSONArray();
+                            arr.put(0, diagnosis);
+                            payload.put("diagnosis", arr);
+
+                        } catch (
+                                Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        RequestBody formBody = RequestBody.create(JSON, payload.toString());
+
+                        Request request = new Request.Builder()
+                                .url(url)
+                                .post(formBody)
+                                .addHeader("Authorization", "Bearer " + loginToken)
+                                .addHeader("Content-Type", "application/json")
+                                .build();
+
+                        Response response = null;
+
+                        try {
+                            response = client.newCall(request).execute();
+                            ResponseBody rb = response.body();
+                            //System.out.println(rb.string());
+                            result = rb.string();
+                            System.out.println(result);
+                        } catch (
+                                Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                };
+                thread.start();
+                if(result.equals("DB successfully updated")) {
+                    Intent intent = new Intent(MainForm.this, SubmitActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),result, Toast.LENGTH_LONG).show();
+                }
 
             }
         });
