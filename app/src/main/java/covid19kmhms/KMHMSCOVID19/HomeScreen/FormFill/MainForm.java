@@ -1,9 +1,15 @@
 package covid19kmhms.KMHMSCOVID19.HomeScreen.FormFill;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,15 +19,25 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import covid19kmhms.KMHMSCOVID19.R;
 import okhttp3.MediaType;
@@ -39,6 +55,10 @@ public class MainForm extends AppCompatActivity {
     String genderSelect;
     String StateSelect;
 
+    TextView btLocation;
+    TextView textView1, textView2, textView3, textView4, textView5,textView6;
+    FusedLocationProviderClient fusedLocationProviderClient;
+
 
     RadioGroup visitGroup,TypeofVisitGroup,IsPersonPositiveForCoronaGroup,IsPersonMigrantGroup,ReasonForQuarantineGroup,
             TypeOfConsultationGroup;
@@ -46,19 +66,29 @@ public class MainForm extends AppCompatActivity {
     RadioButton visitButton,TypeofVisitButton,IsPersonPositiveForCoronaButton,IsPersonMigrantButton,ReasonForQuarantineButton,
             TypeOfConsultationButton;
 
-    EditText DateOfConsultation, Enter_ID_Number, Pincode, Referral_By, IfOthersPleaseSpecify, IfOthersReasonForQuarantine,
+    EditText Diagnosis_Type,ICD_Description,DateOfConsultation, ConsultationAddress, Pincode, Referral_By, IfOthersPleaseSpecify, IfOthersReasonForQuarantine,
             ComplaintsField, DurationComplaint, History, Illness_Summery, ICD_10_Code, MedicineDosageDuration, Remarks, Notes;
 
-    String DateOfConsultation_string, Enter_ID_Number_string, Pincode_string, Referral_By_string, IfOthersPleaseSpecify_string,
+    String DateOfConsultation_string, Pincode_string, Referral_By_string, IfOthersPleaseSpecify_string,
             IfOthersReasonForQuarantine_string, ComplaintsField_string, DurationComplaint_string, History_string,
-            Illness_Summery_string, ICD_10_Code_string, MedicineDosageDuration_string, Remarks_string, Notes_string;
+            ICD_Description_string,Diagnosis_Type_string,IsPersonMigrant_string,
+            ConsultationAddress_string,Illness_Summery_string, ICD_10_Code_string, MedicineDosageDuration_string, Remarks_string, Notes_string;
 
     String visitButton_string,TypeofVisitButton_string,IsPersonPositiveForCoronaButton_string,IsPersonMigrantButton_string,
-            ReasonForQuarantineButton_string, TypeOfConsultationButton_string;
+            ReasonForQuarantineButton_string, TypeOfConsultationButton_string, textView3_string,textView4_string,textView5_string,textView6_string;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
+        btLocation = findViewById(R.id.bt_location);
+        //textView1 = findViewById(R.id.pincode);
+        //textView2 = findViewById(R.id.spinnerState);
+        textView3 = findViewById(R.id.VillageTown);
+        textView4 = findViewById(R.id.District);
+        textView5 = findViewById(R.id.ConsultationAddress);
+        textView6 = findViewById(R.id.pincode);
+
 
         spinnerGender = findViewById(R.id.spinnerGender);
         final List<String> gender = new ArrayList<>();
@@ -84,7 +114,7 @@ public class MainForm extends AppCompatActivity {
             }
         });
 
-        spinnerState = findViewById(R.id.spinnerState);
+        /*spinnerState = findViewById(R.id.spinnerState);
         ArrayAdapter<CharSequence> Stateadapter = ArrayAdapter.createFromResource(this, R.array.state,
                 android.R.layout.simple_spinner_item);
         Stateadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -99,7 +129,7 @@ public class MainForm extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
         button = (Button) findViewById(R.id.submitform);
@@ -124,10 +154,10 @@ public class MainForm extends AppCompatActivity {
                 IsPersonPositiveForCoronaButton = (RadioButton) findViewById(IsPersonPositiveForCoronaSelect);
                 IsPersonPositiveForCoronaButton_string = IsPersonPositiveForCoronaButton.getText().toString();
 
-                /*IsPersonMigrantGroup = (RadioGroup) findViewById(R.id.IsPersonMigrantGroup);
+                IsPersonMigrantGroup = (RadioGroup) findViewById(R.id.IsPersonMigrantGroup);
                 int IsPersonMigrantSelect = IsPersonMigrantGroup.getCheckedRadioButtonId();
-                IsPersonPositiveForCoronaButton = (RadioButton) findViewById(IsPersonPositiveForCoronaSelect);
-                IsPersonMigrantButton_string = IsPersonMigrantButton.getText().toString();*/
+                IsPersonMigrantButton = (RadioButton) findViewById(IsPersonMigrantSelect);
+                IsPersonMigrantButton_string = IsPersonMigrantButton.getText().toString();
 
                 ReasonForQuarantineGroup = (RadioGroup) findViewById(R.id.ReasonForQuarantine);
                 int ReasonForQuarantineSelect = ReasonForQuarantineGroup.getCheckedRadioButtonId();
@@ -143,11 +173,14 @@ public class MainForm extends AppCompatActivity {
                 DateOfConsultation = findViewById(R.id.DateOfConsultation);
                 DateOfConsultation_string = DateOfConsultation.getText().toString();
 
-                Enter_ID_Number = findViewById(R.id.Enter_ID_Number);
-                Enter_ID_Number_string = Enter_ID_Number.getText().toString();
+                ConsultationAddress = findViewById(R.id.ConsultationAddress);
+                ConsultationAddress_string = ConsultationAddress.getText().toString();
 
-                Pincode = findViewById(R.id.pincode);
-                Pincode_string = Pincode.getText().toString();
+                textView4 = findViewById(R.id.District);
+                textView4_string = textView4.getText().toString();
+
+                textView6 = findViewById(R.id.pincode);
+                textView6_string = textView6.getText().toString();
 
                 Referral_By = findViewById(R.id.Referral_By);
                 Referral_By_string = Referral_By.getText().toString();
@@ -182,7 +215,19 @@ public class MainForm extends AppCompatActivity {
                 Notes = findViewById(R.id.Notes);
                 Notes_string = Notes.getText().toString();
 
-                StateSelect = spinnerState.getSelectedItem().toString();
+                Diagnosis_Type = findViewById(R.id.Diagnosis_Type);
+                Diagnosis_Type_string = Diagnosis_Type.getText().toString();
+
+                ICD_Description = findViewById(R.id.ICD_Description);
+                ICD_Description_string = ICD_Description.getText().toString();
+
+
+
+
+
+
+
+                //StateSelect = spinnerState.getSelectedItem().toString();
                 genderSelect = spinnerGender.getSelectedItem().toString();
 
 
@@ -199,9 +244,9 @@ public class MainForm extends AppCompatActivity {
                         final MediaType JSON
                                 = MediaType.parse("application/json; charset=utf-8");
                         try {
-                            diagnosis.put("diagnosisType", "dty");
+                            diagnosis.put("diagnosisType", Diagnosis_Type_string);
                             diagnosis.put("icdcode", ICD_10_Code_string);
-                            diagnosis.put("icddescription", "icddesc");
+                            diagnosis.put("icddescription", ICD_Description_string);
                         } catch (
                                 Exception e) {
                             e.printStackTrace();
@@ -212,16 +257,16 @@ public class MainForm extends AppCompatActivity {
                             payload.put("dateOfConsultation", DateOfConsultation_string);
                             payload.put("visitType", TypeofVisitButton_string);
                             payload.put("visit", visitButton_string);
-                            payload.put("addressLine1", Enter_ID_Number_string);
-                            payload.put("district", "dist");
+                            payload.put("addressLine1", ConsultationAddress_string);
+                            payload.put("district", textView4_string);
                             payload.put("city", "city");
-                            payload.put("state", StateSelect);
+                            payload.put("state", "Karnataka");
                             payload.put("pincode", Pincode_string);
                             payload.put("age", Referral_By_string);
                             payload.put("gender", genderSelect);
-                            payload.put("typeOfConsultation", "typecon");
+                            payload.put("typeOfConsultation", TypeOfConsultationButton_string);
                             payload.put("coronaPositive", "No");
-                            payload.put("migrant", "migr");
+                            payload.put("migrant", IsPersonMigrantButton_string);
                             payload.put("quarantineReason", ReasonForQuarantineButton_string);
                             payload.put("complaint", ComplaintsField_string);
                             payload.put("history", History_string);
@@ -284,6 +329,70 @@ public class MainForm extends AppCompatActivity {
                 if(flag == false){
                     System.out.println("False value aaya hai");
                     Toast.makeText(getApplicationContext(),"Error occurred while saving data", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        btLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(MainForm.this
+                        , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    getLocation();
+                } else {
+                    ActivityCompat.requestPermissions(MainForm.this
+                            , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+                }
+            }
+        });
+    }
+
+    private void getLocation() {
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                if (location != null) {
+                    try {
+                        Geocoder geocoder = new Geocoder(MainForm.this, Locale.getDefault());
+
+                        List<Address> addresses = geocoder.getFromLocation(
+                                location.getLatitude(),location.getLongitude(), 1
+                        );
+                        //set Latitude
+                        /*textView1.setText(Html.fromHtml(
+                                "<font color='#6200EE'><b> </b><br></font>"
+                                        + addresses.get(0).getLatitude()
+                        ));
+                        //set Longitude
+                        textView2.setText(Html.fromHtml(
+                                "<font color='#6200EE'><b> </b><br></font>"
+                                        + addresses.get(0).getLongitude()
+                        ));*/
+                        //set Country
+                        textView3.setText(Html.fromHtml(
+                                "<font color='#6200EE'><b></b><br></font>"
+                                        + addresses.get(0).getCountryName()
+                        ));
+                        //set Locality
+                        textView4.setText(Html.fromHtml(
+                                "<font color='#6200EE'><b></b><br></font>"
+                                        + addresses.get(0).getLocality()
+                        ));
+                        //set address
+                        textView5.setText(Html.fromHtml(
+                                "<font color='#6200EE'><b></b><br></font>"
+                                        + addresses.get(0).getAddressLine(0)
+                        ));
+                        textView6.setText(Html.fromHtml(
+                                "<font color='#6200EE'><b></b><br></font>"
+                                        + addresses.get(0).getPostalCode()
+                        ));
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

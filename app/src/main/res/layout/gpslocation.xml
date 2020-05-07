@@ -111,7 +111,7 @@
                     android:layout_marginTop="8dp"
                     android:textStyle="bold"
                     android:textFontWeight="600"
-                     />
+                    />
 
                 <EditText
                     android:id="@+id/ConsultationAddress"
@@ -119,7 +119,7 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:ems="10"
-                    android:paddingLeft="17dp"
+                    android:paddingLeft="4dp"
                     android:inputType="textPersonName"
                     android:hint="Consultation Address"
                     android:background="@drawable/border_style" />
@@ -149,10 +149,28 @@
                         android:layout_marginLeft="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/border_style"
-                        android:hint="Village/Town"
+                        android:hint="Country"
                         android:paddingLeft="4dp" />
-
                 </LinearLayout>
+                <EditText
+                    android:id="@+id/spinnerState"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:hint="Latitude"
+                    android:background="@drawable/border_style"
+                    android:paddingLeft="4dp"/>
+
+                <EditText
+                    android:id="@+id/pincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:hint="Longitude"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border_style"
+                    android:paddingLeft="4dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,28 +183,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/Mobile_number">
 
-                    <EditText
-                        android:id="@+id/spinnerState"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="Karnataka"
-                        android:background="@drawable/border_style"
-                        android:paddingLeft="4dp"/>
 
-                    <EditText
-                        android:id="@+id/pincode"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_weight="1"
-                        android:hint="Pincode"
-                        android:background="@drawable/border_style"
-                        android:inputType="number"
-                        android:maxLength="7"
-                        android:paddingLeft="4dp">
 
-                    </EditText>
+
+
+
                 </LinearLayout>
 
                 <TextView
@@ -464,7 +465,7 @@
                     android:textSize="16dp"
                     android:layout_marginTop="8dp"/>
 
-                <EditText
+                <Spinner
                     android:id="@+id/Diagnosis_Type"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -475,7 +476,7 @@
                     android:hint="Diagnosis Type"
                     android:background="@drawable/border_style"/>
 
-                <EditText
+                <Spinner
                     android:id="@+id/ICD_Description"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
