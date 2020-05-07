@@ -31,9 +31,13 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public class MainForm extends AppCompatActivity {
-    private String result = null;
+    private String result;
+    private boolean flag = true;
     Button button;
     Spinner spinnerGender , spinnerState;
+    String genderSelect;
+    String StateSelect;
+
 
     RadioGroup visitGroup,TypeofVisitGroup,IsPersonPositiveForCoronaGroup,IsPersonMigrantGroup,ReasonForQuarantineGroup,
             TypeOfConsultationGroup;
@@ -106,8 +110,8 @@ public class MainForm extends AppCompatActivity {
                 visitGroup = (RadioGroup) findViewById(R.id.visitGroup);
                 int visitSelect = visitGroup.getCheckedRadioButtonId();
                 visitButton = (RadioButton) findViewById(visitSelect);
-                //visitButton_string = visitButton.getText().toString();
-                visitButton_string = "visit";
+                visitButton_string = visitButton.getText().toString();
+                //visitButton_string = "visit";
 
                 TypeofVisitGroup = (RadioGroup) findViewById(R.id.TypeofVisitGroup);
                 int TypeofVisitSelect = TypeofVisitGroup.getCheckedRadioButtonId();
@@ -177,8 +181,8 @@ public class MainForm extends AppCompatActivity {
                 Notes = findViewById(R.id.Notes);
                 Notes_string = Notes.getText().toString();
 
-                String StateSelect = spinnerState.getSelectedItem().toString();
-                String genderSelect = spinnerGender.getSelectedItem().toString();
+                StateSelect = spinnerState.getSelectedItem().toString();
+                genderSelect = spinnerGender.getSelectedItem().toString();
 
 
                 Thread thread = new Thread() {
@@ -196,7 +200,7 @@ public class MainForm extends AppCompatActivity {
                         try {
 
                             diagnosis.put("diagnosisType", "dty");
-                            diagnosis.put("icdcode", "F12134");
+                            diagnosis.put("icdcode", ICD_10_Code_string);
                             diagnosis.put("icddescription", "icddesc");
                         } catch (
                                 Exception e) {
@@ -205,25 +209,25 @@ public class MainForm extends AppCompatActivity {
 
                         JSONObject payload = new JSONObject();
                         try {
-                            payload.put("dateOfConsultation", "24/03/2020");
-                            payload.put("visitType", "vtype");
-                            payload.put("visit", "vist");
-                            payload.put("addressLine1", "adss");
+                            payload.put("dateOfConsultation", DateOfConsultation_string);
+                            payload.put("visitType", TypeofVisitButton_string);
+                            payload.put("visit", visitButton_string);
+                            payload.put("addressLine1", Enter_ID_Number_string);
                             payload.put("district", "dist");
                             payload.put("city", "city");
-                            payload.put("state", "Kar");
-                            payload.put("pincode", "444444");
-                            payload.put("age", "20");
-                            payload.put("gender", "male");
+                            payload.put("state", StateSelect);
+                            payload.put("pincode", Pincode_string);
+                            payload.put("age", Referral_By_string);
+                            payload.put("gender", genderSelect);
                             payload.put("typeOfConsultation", "typecon");
                             payload.put("coronaPositive", "No");
                             payload.put("migrant", "migr");
-                            payload.put("quarantineReason", "qr");
-                            payload.put("complaint", "com");
-                            payload.put("history", "hist");
-                            payload.put("illnessSummary", "ill");
-                            payload.put("prescription", "pres");
-                            payload.put("notes", "notes");
+                            payload.put("quarantineReason", ReasonForQuarantineButton_string);
+                            payload.put("complaint", ComplaintsField_string);
+                            payload.put("history", History_string);
+                            payload.put("illnessSummary", Illness_Summery_string);
+                            payload.put("prescription", MedicineDosageDuration_string);
+                            payload.put("notes", Notes_string);
                             payload.put("userUuid", "uuid");
                             payload.put("latitude", "32435");
                             payload.put("longitude", "45");
@@ -236,6 +240,8 @@ public class MainForm extends AppCompatActivity {
                                 Exception e) {
                             e.printStackTrace();
                         }
+
+                        System.out.println(payload.toString());
 
                         RequestBody formBody = RequestBody.create(JSON, payload.toString());
 
@@ -250,10 +256,16 @@ public class MainForm extends AppCompatActivity {
 
                         try {
                             response = client.newCall(request).execute();
+                            if(response.code() != 200)
+                                flag = false;
+
                             ResponseBody rb = response.body();
-                            //System.out.println(rb.string());
                             result = rb.string();
-                            System.out.println(result);
+                            System.out.println("##############"+result);
+                            if(result.contains("record stored successfully")) {
+                                Intent intent = new Intent(MainForm.this, SubmitActivity.class);
+                                startActivity(intent);
+                            }
                         } catch (
                                 Exception e) {
                             e.printStackTrace();
@@ -262,13 +274,10 @@ public class MainForm extends AppCompatActivity {
 
                 };
                 thread.start();
-                if(result.equals("DB successfully updated")) {
-                    Intent intent = new Intent(MainForm.this, SubmitActivity.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(),result, Toast.LENGTH_LONG).show();
+                if(flag == false){
+                    System.out.println("False hai");
+                    Toast.makeText(getApplicationContext(),"Unable to save data", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
