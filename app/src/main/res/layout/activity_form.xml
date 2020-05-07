@@ -66,6 +66,7 @@
                         android:id="@+id/newVisit"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
+                        android:checked="true"
                         android:text="New"/>
                     <RadioButton
                         android:id="@+id/FollowUpVisit"
@@ -242,6 +243,7 @@
                         android:id="@+id/QuarantineHomes"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
+                        android:checked="true"
                         android:text="Quarantine Homes"/>
                     <RadioButton
                         android:id="@+id/MigrantCamps"
@@ -290,6 +292,7 @@
                     android:orientation="vertical"
                     >
                     <RadioButton
+                        android:checked="true"
                         android:id="@+id/Yes"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -327,6 +330,7 @@
                     android:orientation="horizontal"
                     >
                     <RadioButton
+                        android:checked="true"
                         android:id="@+id/MigrantYes"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -355,6 +359,7 @@
                     android:orientation="vertical"
                     >
                     <RadioButton
+                        android:checked="true"
                         android:id="@+id/CloseContact"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -508,6 +513,7 @@
                     android:orientation="horizontal"
                     >
                     <RadioButton
+                        android:checked="true"
                         android:id="@+id/Counseling"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"

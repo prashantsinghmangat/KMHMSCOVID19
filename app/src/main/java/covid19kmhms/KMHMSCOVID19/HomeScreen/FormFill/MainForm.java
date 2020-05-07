@@ -68,7 +68,7 @@ public class MainForm extends AppCompatActivity {
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String genderSelect = spinnerGender.getSelectedItem().toString();
+
                 //String genderSelect = parent.getItemAtPosition(position).toString();
                 //Toast.makeText(parent.getContext(), genderSelect, Toast.LENGTH_SHORT).show();
             }
@@ -88,90 +88,13 @@ public class MainForm extends AppCompatActivity {
         spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String StateSelect = spinnerState.getSelectedItem().toString();
-            }
 
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
-        visitGroup = (RadioGroup) findViewById(R.id.visitGroup);
-        int visitSelect = visitGroup.getCheckedRadioButtonId();
-        visitButton = (RadioButton) findViewById(visitSelect);
-        //visitButton_string = visitButton.getText().toString();
-        visitButton_string = "visit";
-        TypeofVisitGroup = (RadioGroup) findViewById(R.id.TypeofVisitGroup);
-        int TypeofVisitSelect = TypeofVisitGroup.getCheckedRadioButtonId();
-        TypeofVisitButton = (RadioButton) findViewById(TypeofVisitSelect);
-        TypeofVisitButton_string = TypeofVisitButton.getText().toString();
-
-        IsPersonPositiveForCoronaGroup = (RadioGroup) findViewById(R.id.IsPersonPositiveForCoronaGroup);
-        int IsPersonPositiveForCoronaSelect = IsPersonPositiveForCoronaGroup.getCheckedRadioButtonId();
-        IsPersonPositiveForCoronaButton = (RadioButton) findViewById(IsPersonPositiveForCoronaSelect);
-        IsPersonPositiveForCoronaButton_string = IsPersonPositiveForCoronaButton.getText().toString();
-
-        IsPersonMigrantGroup = (RadioGroup) findViewById(R.id.IsPersonMigrantGroup);
-        int IsPersonMigrantSelect = IsPersonMigrantGroup.getCheckedRadioButtonId();
-        IsPersonPositiveForCoronaButton = (RadioButton) findViewById(IsPersonPositiveForCoronaSelect);
-        IsPersonMigrantButton_string = IsPersonMigrantButton.getText().toString();
-
-        ReasonForQuarantineGroup = (RadioGroup) findViewById(R.id.ReasonForQuarantine);
-        int ReasonForQuarantineSelect = ReasonForQuarantineGroup.getCheckedRadioButtonId();
-        ReasonForQuarantineButton = (RadioButton) findViewById(ReasonForQuarantineSelect);
-        ReasonForQuarantineButton_string = ReasonForQuarantineButton.getText().toString();
-
-        TypeOfConsultationGroup = (RadioGroup) findViewById(R.id.TypeOfConsultationGroup);
-        int TypeOfConsultationSelect = TypeOfConsultationGroup.getCheckedRadioButtonId();
-        TypeOfConsultationButton = (RadioButton) findViewById(TypeOfConsultationSelect);
-        TypeOfConsultationButton_string = TypeOfConsultationButton.getText().toString();
-
-
-        DateOfConsultation = findViewById(R.id.DateOfConsultation);
-        DateOfConsultation_string = DateOfConsultation.getText().toString();
-
-        Enter_ID_Number = findViewById(R.id.DateOfConsultation);
-        Enter_ID_Number_string = Enter_ID_Number.getText().toString();
-
-        Pincode = findViewById(R.id.DateOfConsultation);
-        Pincode_string = Pincode.getText().toString();
-
-        Referral_By = findViewById(R.id.DateOfConsultation);
-        Referral_By_string = Referral_By.getText().toString();
-
-        IfOthersPleaseSpecify = findViewById(R.id.DateOfConsultation);
-        IfOthersPleaseSpecify_string = IfOthersPleaseSpecify.getText().toString();
-
-        IfOthersReasonForQuarantine = findViewById(R.id.DateOfConsultation);
-        IfOthersReasonForQuarantine_string = IfOthersReasonForQuarantine.getText().toString();
-
-        ComplaintsField = findViewById(R.id.DateOfConsultation);
-        ComplaintsField_string = ComplaintsField.getText().toString();
-
-        DurationComplaint = findViewById(R.id.DateOfConsultation);
-        DurationComplaint_string = DurationComplaint.getText().toString();
-
-        History = findViewById(R.id.DateOfConsultation);
-        History_string = History.getText().toString();
-
-        Illness_Summery = findViewById(R.id.DateOfConsultation);
-        Illness_Summery_string = Illness_Summery.getText().toString();
-
-        ICD_10_Code = findViewById(R.id.DateOfConsultation);
-        ICD_10_Code_string = ICD_10_Code.getText().toString();
-
-        MedicineDosageDuration = findViewById(R.id.DateOfConsultation);
-        MedicineDosageDuration_string = MedicineDosageDuration.getText().toString();
-
-        Remarks = findViewById(R.id.DateOfConsultation);
-        Remarks_string = Remarks.getText().toString();
-
-        Notes = findViewById(R.id.DateOfConsultation);
-        Notes_string = Notes.getText().toString();
-
-
-
 
 
         button = (Button) findViewById(R.id.submitform);
@@ -179,6 +102,83 @@ public class MainForm extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                visitGroup = (RadioGroup) findViewById(R.id.visitGroup);
+                int visitSelect = visitGroup.getCheckedRadioButtonId();
+                visitButton = (RadioButton) findViewById(visitSelect);
+                //visitButton_string = visitButton.getText().toString();
+                visitButton_string = "visit";
+
+                TypeofVisitGroup = (RadioGroup) findViewById(R.id.TypeofVisitGroup);
+                int TypeofVisitSelect = TypeofVisitGroup.getCheckedRadioButtonId();
+                TypeofVisitButton = (RadioButton) findViewById(TypeofVisitSelect);
+                TypeofVisitButton_string = TypeofVisitButton.getText().toString();
+
+                IsPersonPositiveForCoronaGroup = (RadioGroup) findViewById(R.id.IsPersonPositiveForCoronaGroup);
+                int IsPersonPositiveForCoronaSelect = IsPersonPositiveForCoronaGroup.getCheckedRadioButtonId();
+                IsPersonPositiveForCoronaButton = (RadioButton) findViewById(IsPersonPositiveForCoronaSelect);
+                IsPersonPositiveForCoronaButton_string = IsPersonPositiveForCoronaButton.getText().toString();
+
+                /*IsPersonMigrantGroup = (RadioGroup) findViewById(R.id.IsPersonMigrantGroup);
+                int IsPersonMigrantSelect = IsPersonMigrantGroup.getCheckedRadioButtonId();
+                IsPersonPositiveForCoronaButton = (RadioButton) findViewById(IsPersonPositiveForCoronaSelect);
+                IsPersonMigrantButton_string = IsPersonMigrantButton.getText().toString();*/
+
+                ReasonForQuarantineGroup = (RadioGroup) findViewById(R.id.ReasonForQuarantine);
+                int ReasonForQuarantineSelect = ReasonForQuarantineGroup.getCheckedRadioButtonId();
+                ReasonForQuarantineButton = (RadioButton) findViewById(ReasonForQuarantineSelect);
+                ReasonForQuarantineButton_string = ReasonForQuarantineButton.getText().toString();
+
+                TypeOfConsultationGroup = (RadioGroup) findViewById(R.id.TypeOfConsultationGroup);
+                int TypeOfConsultationSelect = TypeOfConsultationGroup.getCheckedRadioButtonId();
+                TypeOfConsultationButton = (RadioButton) findViewById(TypeOfConsultationSelect);
+                TypeOfConsultationButton_string = TypeOfConsultationButton.getText().toString();
+
+
+                DateOfConsultation = findViewById(R.id.DateOfConsultation);
+                DateOfConsultation_string = DateOfConsultation.getText().toString();
+
+                Enter_ID_Number = findViewById(R.id.Enter_ID_Number);
+                Enter_ID_Number_string = Enter_ID_Number.getText().toString();
+
+                Pincode = findViewById(R.id.pincode);
+                Pincode_string = Pincode.getText().toString();
+
+                Referral_By = findViewById(R.id.Referral_By);
+                Referral_By_string = Referral_By.getText().toString();
+
+                IfOthersPleaseSpecify = findViewById(R.id.IfOthersPleaseSpecify);
+                IfOthersPleaseSpecify_string = IfOthersPleaseSpecify.getText().toString();
+
+                IfOthersReasonForQuarantine = findViewById(R.id.IfOthersReasonForQuarantine);
+                IfOthersReasonForQuarantine_string = IfOthersReasonForQuarantine.getText().toString();
+
+                ComplaintsField = findViewById(R.id.ComplaintsField);
+                ComplaintsField_string = ComplaintsField.getText().toString();
+
+                DurationComplaint = findViewById(R.id.DurationComplaint);
+                DurationComplaint_string = DurationComplaint.getText().toString();
+
+                History = findViewById(R.id.History);
+                History_string = History.getText().toString();
+
+                Illness_Summery = findViewById(R.id.Illness_Summery);
+                Illness_Summery_string = Illness_Summery.getText().toString();
+
+                ICD_10_Code = findViewById(R.id.ICD_10_Code);
+                ICD_10_Code_string = ICD_10_Code.getText().toString();
+
+                MedicineDosageDuration = findViewById(R.id.MedicineDosageDuration);
+                MedicineDosageDuration_string = MedicineDosageDuration.getText().toString();
+
+                Remarks = findViewById(R.id.Remarks);
+                Remarks_string = Remarks.getText().toString();
+
+                Notes = findViewById(R.id.Notes);
+                Notes_string = Notes.getText().toString();
+
+                String StateSelect = spinnerState.getSelectedItem().toString();
+                String genderSelect = spinnerGender.getSelectedItem().toString();
 
 
                 Thread thread = new Thread() {
