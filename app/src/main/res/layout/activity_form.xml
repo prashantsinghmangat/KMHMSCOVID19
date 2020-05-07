@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollopbmr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BMR Form"
+                    android:textColor="#813D7E"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:textFontWeight="600"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/DateOfConsultation"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="12dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/border_style"
+                    android:hint="Date of consultation" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Visit"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textFontWeight="600" />
+
+                <RadioGroup
+                    android:id="@+id/visitGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    >
+                    <RadioButton
+                        android:id="@+id/newVisit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="New"/>
+                    <RadioButton
+                        android:id="@+id/FollowUpVisit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="Follow-up"/>
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textFontWeight="600"
+                     />
+
+                <EditText
+                    android:id="@+id/Enter_ID_Number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:inputType="textPersonName"
+                    android:hint="Consultation Address"
+                    android:background="@drawable/border_style" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="2"
+                    android:layout_marginTop="8dp"
+                    android:rowCount="1">
+
+                    <Spinner
+                        android:id="@+id/District"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:ems="10"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:tooltipText="Reason"
+                        android:contextClickable="true"
+                        android:paddingLeft="17dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName"
+                        android:hint="OTP"
+                        android:background="@drawable/border_style"/>
+
+                    <Spinner
+                        android:id="@+id/VillageTown"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:ems="10"
+                        android:layout_marginTop="8dp"
+                        android:tooltipText="Reason"
+                        android:contextClickable="true"
+                        android:paddingLeft="17dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="8dp"
+                        android:inputType="textPersonName"
+                        android:hint="OTP"
+                        android:background="@drawable/border_style" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="2"
+                    android:layout_marginTop="8dp"
+                    android:rowCount="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Mobile_number">
+
+                    <Spinner
+                        android:id="@+id/State"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:ems="10"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:tooltipText="Reason"
+                        android:contextClickable="true"
+                        android:paddingLeft="17dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName"
+                        android:hint="OTP"
+                        android:background="@drawable/border_style"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0" />
+
+                    <EditText
+                        android:id="@+id/pincode"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:hint="Pincode"
+                        android:background="@drawable/border_style"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:paddingLeft="17dp">
+
+                    </EditText>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/reffered_details_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Patient Details"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+
+
+                <EditText
+                    android:id="@+id/Referral_By"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:inputType="textPersonName"
+                    android:hint="Age of Patient in Years"
+                    android:background="@drawable/border_style"
+                    />
+
+                <Spinner
+                    android:id="@+id/Gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:tooltipText="Reason"
+                    android:paddingLeft="17dp"
+                    android:hint="OTP"
+                    android:background="@drawable/border_style" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type of Visit"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+                <RadioGroup
+                    android:id="@+id/TypeofVisitGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <RadioButton
+                        android:id="@+id/QuarantineHomes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Quarantine Homes"/>
+                    <RadioButton
+                        android:id="@+id/MigrantCamps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Follow-Migrant Camps"/>
+                    <RadioButton
+                        android:id="@+id/IndividualHomes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Individual Homes"/>
+                    <RadioButton
+                        android:id="@+id/Others"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Others"/>
+                </RadioGroup>
+
+
+                <EditText
+                    android:id="@+id/IfOthersPleaseSpecify"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="If others, please specify"
+                    android:paddingLeft="17dp"
+                    android:background="@drawable/border_style"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Is person positive for Corona?"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/IsPersonPositiveForCoronaGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <RadioButton
+                        android:id="@+id/Yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Yes"/>
+                    <RadioButton
+                        android:id="@+id/No"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="No"/>
+                    <RadioButton
+                        android:id="@+id/Recovered"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Recovered"/>
+                    <RadioButton
+                        android:id="@+id/TestInitiated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Test Initiated"/>
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Is Person Migrant?"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+                <RadioGroup
+                    android:id="@+id/IsPersonMigrantGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <RadioButton
+                        android:id="@+id/MigrantYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Yes"/>
+                    <RadioButton
+                        android:id="@+id/MigrantNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="No"/>
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reason for quarantine"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+                <RadioGroup
+                    android:id="@+id/ReasonForQuarantine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <RadioButton
+                        android:id="@+id/CloseContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Close contact with positive covid case"/>
+                    <RadioButton
+                        android:id="@+id/RecentTravel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Recent travel from covid hot spot"/>
+                    <RadioButton
+                        android:id="@+id/SuspectedInfection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Suspected infection with symptoms"/>
+                    <RadioButton
+                        android:id="@+id/AdministrativeOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Administrative order"/>
+                </RadioGroup>
+                <EditText
+                    android:id="@+id/IfOthersReasonForQuarantine"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="If others, please specify"
+                    android:paddingLeft="17dp"
+                    android:background="@drawable/border_style"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Complaints"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+                <EditText
+                    android:id="@+id/ComplaintsField"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="Complaint"
+                    android:paddingLeft="17dp"
+                    android:background="@drawable/border_style"
+                    />
+                <EditText
+                    android:id="@+id/DurationComplaint"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="Duration"
+                    android:paddingLeft="17dp"
+                    android:background="@drawable/border_style"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="History and Illness Summary"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <EditText
+                    android:id="@+id/History"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:inputType="textPersonName"
+                    android:hint="History of Mental Status Examination"
+                    android:background="@drawable/border_style" />
+
+
+                <EditText
+                    android:id="@+id/Illness_Summery"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:ems="10"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="Illness Summery"
+                    android:paddingLeft="17dp"
+                    android:background="@drawable/border_style" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Diagnosis"
+                    android:textColor="#813D7E"
+                    android:textSize="16dp"
+                    android:layout_marginTop="8dp"/>
+
+                <Spinner
+                    android:id="@+id/Diagnosis_Type"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="Diagnosis Type"
+                    android:background="@drawable/border_style"/>
+
+                <Spinner
+                    android:id="@+id/ICD_Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="ICD Description"
+                    android:background="@drawable/border_style" />
+
+                <EditText
+                    android:id="@+id/ICD_10_Code"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="ICD 10 Code"
+                    android:background="@drawable/border_style" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type of Consultation"
+                    android:textColor="#565656"
+                    android:textSize="18dp"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="8dp"
+                    />
+                <RadioGroup
+                    android:id="@+id/TypeOfConsultationGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <RadioButton
+                        android:id="@+id/Counseling"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="Counseling"/>
+                    <RadioButton
+                        android:id="@+id/Medicines"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="Medicines"/>
+                    <RadioButton
+                        android:id="@+id/Referral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="Referral"/>
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Prescription"
+                    android:textColor="#813D7E"
+                    android:textSize="16dp"
+                    android:layout_marginTop="8dp"/>
+
+                <EditText
+                    android:id="@+id/MedicineDosageDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="Medicine, Dosage, Duration"
+                    android:background="@drawable/border_style"/>
+
+                <EditText
+                    android:id="@+id/Remarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="Remarks"
+                    android:background="@drawable/border_style" />
+
+                <EditText
+                    android:id="@+id/Notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:ems="10"
+                    android:paddingLeft="17dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="Notes"
+                    android:background="@drawable/border_style" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#FBFBFB"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_rounded"
+                    android:inputType="textPersonName"
+                    android:text="Submit"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>
