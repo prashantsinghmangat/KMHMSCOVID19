@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="covid19kmhms.KMHMSCOVID19">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".HomeScreen.FormFill.SubmitActivity"></activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".HomeScreen.FormFill.MainForm" />
         <activity android:name=".HomeScreen.HomepageNav" />
         <activity android:name=".Login.LoginBmr">

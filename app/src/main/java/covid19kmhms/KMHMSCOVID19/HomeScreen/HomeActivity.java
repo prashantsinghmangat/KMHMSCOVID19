@@ -31,8 +31,7 @@ public class HomeActivity extends Fragment {
                 startActivity(intent);
 
             }
-        })
-        ;
+        });
         return view;
     }
 }

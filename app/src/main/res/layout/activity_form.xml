@@ -569,7 +569,7 @@
                     android:background="@drawable/border_style" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/submitform"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:ems="10"
