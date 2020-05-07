@@ -1,5 +1,6 @@
 package covid19kmhms.KMHMSCOVID19.Login;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,16 +47,12 @@ public class LoginBmr extends AppCompatActivity {
         Info = (TextView)findViewById(R.id.tvInfo);
         Login = (Button)findViewById(R.id.btnLogin);
 
-        //spinner=(ProgressBar)findViewById(R.id.progressBar);
-        //spinner.setVisibility(View.GONE);
 
         Info.setText("");
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //for loader circle
-                //spinner.setVisibility(View.VISIBLE);
 
                 System.out.println("inside on click listener");
                 Runnable runnable = new Runnable() {
@@ -67,57 +64,34 @@ public class LoginBmr extends AppCompatActivity {
                         final String password = ((EditText) findViewById(R.id.etPassword)).getText().toString();
                         System.out.println(userName+"     --------------------------     " +password);
 
+
                         String jwtToken = mhpFlow.login(userName, password);
-                        try{
-                            JSONObject jsonObject = new JSONObject(jwtToken);
-                            String token = jsonObject.getString("token");
-                            sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("loginToken", token);
-                            Log.e("inside try", token);
-                            Intent intent = new Intent(LoginBmr.this, HomepageNav.class);
-                            /*intent.putExtra("userName", userName);
-                            intent.putExtra("password", password);*/
-                            LoginBmr.this.startActivity(intent);
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Wrong user ID or/and password entered", Toast.LENGTH_LONG).show();
-                            Log.e("messge", "Wrong user ID or/and password entered");
+                        if(jwtToken == null) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Invalid username and/or password entered", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            Log.e("invalid input", "wrong id or/and password entered");
                         }
-                        /*try {
-                            Log.e("try","inside LoginBmr try----------------------------------");
-                            //Log.e("JWT Token", jwtToken);
-                            JSONObject jsonObjectbject = new JSONObject(jwtToken);
-                            String token = jsonObjectbject.getString("token");
-                            Log.e("Token", token);
+                        else {
+                            try {
+                                JSONObject jsonObject = new JSONObject(jwtToken);
+                                String token = jsonObject.getString("token");
+                                sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("loginToken", token);
+                                Log.e("inside try", token);
+                                Intent intent = new Intent(LoginBmr.this, HomepageNav.class);
+                                LoginBmr.this.startActivity(intent);
 
-                            JSONObject decodedResult = new JSONObject(MHPFlow.decoded(jwtToken));
-                            //Log.e("decoded String (result)", decodedResult.toString());
-                            //Log.e("getAssociatedOrg()",mhpFlow.getAssociatedOrg(token, decodedResult.getString("sessionToken")).toString());
-                            JSONArray jsonArray = mhpFlow.getAssociatedOrg(token, decodedResult.getString("sessionToken"));
-                            //System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
-                            int cnt = 0;
-                            ArrayList<String> list = new ArrayList<String>();
-                            list.add("MHE/OP*");
-                            while(cnt < jsonArray.length()){
-                                JSONObject mheObject = jsonArray.getJSONObject(cnt);
-                                list.add(mheObject.getString("name"));
-                                cnt++;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Wrong user ID or/and password entered", Toast.LENGTH_LONG).show();
+                                Log.e("messge", "Wrong user ID or/and password entered");
                             }
-                            //Log.e("MHE list", list.toString());
-
-
-                            Log.e("try", "outside LoginBmr try----------------------------------");
-                            Intent intent = new Intent(LoginBmr.this, HomepageNav.class);
-                            intent.putExtra("userName", userName);
-                            intent.putExtra("password", password);
-                            intent.putExtra("list", list);
-                            LoginBmr.this.startActivity(intent);
-
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }*/
+                        }
 
                     }
 

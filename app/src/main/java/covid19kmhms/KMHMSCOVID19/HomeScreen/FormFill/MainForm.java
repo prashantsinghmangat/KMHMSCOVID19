@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -198,7 +199,6 @@ public class MainForm extends AppCompatActivity {
                         final MediaType JSON
                                 = MediaType.parse("application/json; charset=utf-8");
                         try {
-
                             diagnosis.put("diagnosisType", "dty");
                             diagnosis.put("icdcode", ICD_10_Code_string);
                             diagnosis.put("icddescription", "icddesc");
@@ -256,8 +256,11 @@ public class MainForm extends AppCompatActivity {
 
                         try {
                             response = client.newCall(request).execute();
-                            if(response.code() != 200)
+
+                            if(response.code() != 200) {
                                 flag = false;
+                                Log.e("error code", String.valueOf(response.code()));
+                            }
 
                             ResponseBody rb = response.body();
                             result = rb.string();
@@ -266,17 +269,21 @@ public class MainForm extends AppCompatActivity {
                                 Intent intent = new Intent(MainForm.this, SubmitActivity.class);
                                 startActivity(intent);
                             }
-                        } catch (
-                                Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
 
-                };
-                thread.start();
+                };thread.start();
+
+                try {
+                    thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 if(flag == false){
-                    System.out.println("False hai");
-                    Toast.makeText(getApplicationContext(),"Unable to save data", Toast.LENGTH_LONG).show();
+                    System.out.println("False value aaya hai");
+                    Toast.makeText(getApplicationContext(),"Error occurred while saving data", Toast.LENGTH_LONG).show();
                 }
             }
         });

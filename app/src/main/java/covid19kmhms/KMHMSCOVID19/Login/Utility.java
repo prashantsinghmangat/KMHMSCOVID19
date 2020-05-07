@@ -15,9 +15,7 @@ import okhttp3.ResponseBody;
 
 public class Utility {
 
-
     OkHttpClient client = new OkHttpClient();
-
 
     public JSONObject login(String userName, String password){
 
@@ -64,7 +62,6 @@ public class Utility {
         return jsonObjectResult;
     }// login ends here
 
-
     public static void decoded(String JWTEncoded) throws Exception {
         try {
             String[] split = JWTEncoded.split("\\.");
@@ -89,9 +86,5 @@ public class Utility {
         byte[] decodedBytes = Base64.decode(strEncoded, Base64.URL_SAFE);
         return new String(decodedBytes, "UTF-8");
     }
-
-
-
-
 
 }
